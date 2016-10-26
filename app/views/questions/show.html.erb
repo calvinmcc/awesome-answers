@@ -1,0 +1,33 @@
+
+<h1> <%= @question.title %> </h1>
+<h3>Created by <%= @question.user_full_name %></h3>
+<br>
+<h3><%= @question.body %></h3>
+<% if can? :manage, @question %>
+<%= link_to 'edit', edit_question_path(@question) %>
+<%= link_to 'delete', question_path(@question),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %>
+<% else %>
+<% end %>
+<%# form_for @answer, url: question_answers_path(@question) do |f| %>
+<%= @answer.errors.full_messages.join(', ') %>
+<%= form_for [@question, @answer] do |f| %>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<h2>All answers</h2>
+<% @question.answers.each do |ans| %>
+  <%= ans.body %> | <%= ans.user_full_name %>
+  <% if can? :delete, ans %>
+  <%= link_to 'delete', question_answer_path(@question, ans),
+                        method: :delete,
+                        data: { confirm: 'are you sure?'} %>
+  <% end %>
+  <hr>
+
+<% end %>

@@ -1,0 +1,19 @@
+<h1>Contact us</h1>
+<%# form_tag is a helper method that will generate a form HTML element with POST http  %>
+<%# request. the first argument of the helper method must be the url you'd like to  %>
+<%# submit the form to%>
+<%= form_tag contact_submit_path do %>
+  <div>
+    <%= label_tag :full_name %>
+    <%= text_field_tag :full_name %>
+  </div>
+  <div>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+  </div>
+  <div>
+    <%= label_tag :message %>
+    <%= text_area_tag :message %>
+  </div>
+  <%= submit_tag 'Contact us!' %>
+<% end %>
