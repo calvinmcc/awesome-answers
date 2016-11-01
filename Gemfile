@@ -31,7 +31,7 @@ gem 'cancancan'
 # gem 'capistrano-rails', group: :development
 
 gem 'faker'
-
+gem 'font-awesome-rails'
 gem 'cowsay'
 
 group :development, :test do

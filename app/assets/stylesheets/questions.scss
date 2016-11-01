@@ -9,3 +9,15 @@
 .field_with_errors {
   display: inline-block;
 }
+
+.vote-link {
+  color: grey;
+}
+
+.vote-link.vote-down {
+  color: blue;
+}
+
+.vote-link.vote-up {
+  color: orange;
+}

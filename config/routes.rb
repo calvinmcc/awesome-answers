@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+
+  get 'likes/destroy'
+
   # when we receive a get request with the '/' url we invoke the index application
   # # within the home controller
   # get '/' => "home#index", as: :home # home_path
@@ -14,7 +18,9 @@ Rails.application.routes.draw do
 
   get '/contact_submit' => 'home#contact_submit'
 
-  resources :questions do
+  resources :questions, shallow: :true do
+    resources :likes, only: [:create, :destroy]
+    resources :votes, only: [:create, :destroy, :update]
     # when we define a route within the block for 'resources' we make the route
     # asscociated with the questions controller. We have different options we
     # can use with these routes:
@@ -51,6 +57,8 @@ Rails.application.routes.draw do
     resources :sessions, only: [:new, :create, :destroy] do
       delete :destroy, on: :collection
     end
+
+
 
   # get '/questions/new' => 'questions#new', as: :new_question
   #

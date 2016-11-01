@@ -6,6 +6,10 @@ class Question < ApplicationRecord
   # You must provide a 'dependent' option to your 'has_many'
   has_many :answers, lambda { order(created_at: :DESC) }, dependent: :destroy
   # has_many :answers, dependent: :nullify -- updates question_id's to 'NULL'
+  has_many :likes, dependent: :destroy
+  has_many :likers, through: :likes, source: :user
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
 
   belongs_to :user
 
@@ -39,6 +43,15 @@ class Question < ApplicationRecord
       'Anonymous'
     end
   end
+
+  def like_for(user)
+    likes.find_by(user: user)
+  end
+
+  def vote_value
+    votes.up.count - votes.down.count
+  end
+
 
   private
 

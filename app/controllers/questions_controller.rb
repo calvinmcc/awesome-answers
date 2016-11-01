@@ -48,6 +48,7 @@ class QuestionsController < ApplicationController
     # find_question
     # render plain: "In show action"
     @answer = Answer.new
+    @like = @question.like_for(current_user)
   end
 
   # this action shows a listing of all the questions
